@@ -1,0 +1,13 @@
+# connect laravel container
+cd project
+php artisan migrate
+
+# connect postgresql container 
+
+psql -h laravel11_db8085  -U user_laravel11_db8085 laravel_webapp8085
+
+# show tables 
+\dt 
+
+# select data
+SELECT * FROM sessions;
