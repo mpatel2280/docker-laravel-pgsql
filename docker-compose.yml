@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+    # PostgreSQL database container
+
+    laraveldb8085:
+        image: patelm2280/docker-postgresql16
+        container_name: laravel11_db8085
+        restart: always
+        volumes:
+            - db-data8085:/var/lib/mysql
+        environment:
+            POSTGRES_DB: laravel_webapp8085
+            POSTGRES_PASSWORD: pwd_laravel11_db8085
+            POSTGRES_USER: user_laravel11_db8085
+        ports:
+          - "5433:5432"
+        networks:
+            - laravel118085
+
+    # Laravel apache project container
+    laravelwww8085:
+        build: docker/php
+        container_name: laravel11_www8085
+        ports:
+          - "8085:80"
+        volumes:
+            - ./docker/php/vhosts:/etc/apache2/sites-enabled
+            - ./:/var/www
+        restart: always
+        networks:
+            - laravel118085
+
+networks:
+    laravel118085:
+
+volumes:
+    db-data8085:
